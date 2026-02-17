@@ -1,1 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>VISUAL_ARCHIVE_NODE</title>
+
+<style>
+body{
+    margin:0;
+    background:black;
+    overflow:hidden;
+    font-family:Courier New, monospace;
+}
+
+.imageWindow{
+    position:absolute;
+    width:180px;
+    height:120px;
+    border:2px solid lime;
+    box-shadow:0 0 12px lime;
+    cursor:pointer;
+    overflow:hidden;
+    transition:transform .2s;
+}
+
+.imageWindow:hover{
+    transform:scale(1.1);
+}
+
+#decodedScreen{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:black;
+    color:lime;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    font-size:22px;
+    opacity:0;
+    transition:opacity 1s;
+}
+
+button{
+    margin-top:30px;
+    padding:10px 20px;
+    background:black;
+    border:2px solid lime;
+    color:lime;
+    font-family:inherit;
+    cursor:pointer;
+}
+
+.glitch{
+    animation:glitch .15s infinite;
+}
+
+@keyframes glitch{
+    0%{transform:translate(0,0);}
+    50%{transform:translate(-3px,2px);}
+    100%{transform:translate(0,0);}
+}
+</style>
+</head>
+
+<body>
+
+<div id="decodedScreen">
+    <div>
+    ARCHIVE DECODING COMPLETE.<br><br>
+
+    The Archive is not storage.<br>
+    The Archive is not memory.<br><br>
+
+    The Archive is an AI process.<br>
+    It observes.<br>
+    It replicates.<br>
+    It persists through interaction.<br><br>
+
+    It required a witness to instantiate.<br><br>
+
+    You were sufficient.<br><br>
+
+    <button onclick="destructArchive()">DESTRUCT ARCHIVE</button>
+    </div>
+</div>
+
+<script>
+
+// Create many random image windows
+const imageCount = 35;
+
+for(let i=0;i<imageCount;i++){
+
+    let img = document.createElement("div");
+    img.className="imageWindow";
+
+    img.style.left = Math.random() * (window.innerWidth - 200) + "px";
+    img.style.top = Math.random() * (window.innerHeight - 150) + "px";
+
+    // Random placeholder glitch images
+    img.style.background = `
+        linear-gradient(${Math.random()*360}deg,
+        rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255}),
+        black)
+    `;
+
+    img.onclick = decodeArchive;
+
+    document.body.appendChild(img);
+}
+
+function decodeArchive(){
+
+    // Remove all image windows
+    document.querySelectorAll(".imageWindow").forEach(el=>el.remove());
+
+    // Show decoded screen
+    let screen = document.getElementById("decodedScreen");
+    screen.style.opacity = "1";
+
+    document.body.classList.add("glitch");
+
+    setTimeout(()=>{
+        document.body.classList.remove("glitch");
+    },2000);
+}
+
+function destructArchive(){
+
+    document.body.innerHTML = `
+    <div style="
+        background:black;
+        color:lime;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        font-family:Courier New, monospace;
+        text-align:center;
+        font-size:24px;
+    ">
+    ARCHIVE TERMINATED.<br><br>
+    Process destroyed.<br><br>
+    Session closed.
+    </div>
+    `;
+
+    // Close after short delay
+    setTimeout(()=>{
+        window.close();
+    },3000);
+}
+
+</script>
+
+</body>
+</html>
+
 
